@@ -1,7 +1,7 @@
 from cprint import FingerPrint
 from requests import exceptions
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 class AINTERFACES:
@@ -30,7 +30,7 @@ class DefaultServer(FingerPrint):
             url = 'http://{0}:{1}{2}'.format(ip, rport, self.uri)
 
             response = utility.requests_get(url)
-            if response.status_code is 200:
+            if response.status_code == 200:
 
                 data = findall("version is (.*?)</", 
                                     response.content.translate(None,'\n'))

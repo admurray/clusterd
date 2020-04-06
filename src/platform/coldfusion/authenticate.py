@@ -1,12 +1,12 @@
 from requests.auth import HTTPDigestAuth
 from requests.utils import dict_from_cookiejar
-from log import LOG
+from src.core.log import LOG
 from sys import stdout
 from hashlib import sha1
 from re import findall
 import hmac
-import utility
-import state
+from src.core import utility
+from src.core import state
 
 default_credentials = [("admin", "admin")]
 
@@ -17,7 +17,7 @@ def _salt(url):
     """
 
     r = utility.requests_get(url)
-    if r.status_code is 200:
+    if r.status_code == 200:
 
         salt = findall("name=\"salt\" type=\"hidden\" value=\"(.*?)\">", r.content)
         return salt[0]
@@ -61,7 +61,7 @@ def _auth(usr, pswd, url, version):
 
     try:
         res = utility.requests_post(url, data=data)
-        if res.status_code is 200:
+        if res.status_code == 200:
 
             utility.Msg("Successfully authenticated with %s:%s" % (usr, pswd), LOG.DEBUG)
             if version in ['5.0']:
@@ -69,7 +69,7 @@ def _auth(usr, pswd, url, version):
             elif len(res.history) > 0:
                 return (dict_from_cookiejar(res.history[0].cookies), None)
 
-    except Exception, e:
+    except Exception as e:
         utility.Msg("Error authenticating: %s" % e, LOG.ERROR)
         return (None, None)
 
@@ -88,13 +88,13 @@ def attemptRDS(ip, port):
            }
 
     response = utility.requests_post(url + uri, data)
-    if response.status_code is 200 and "true" in response.content:
+    if response.status_code == 200 and "true" in response.content:
         return (dict_from_cookiejar(response.cookies), None)
     else:
         # try it with rdsPasswordAllowed = 0
         data['rdsPasswordAllowed'] = 0
         response = utility.requests_post(url + uri, data)
-        if response.status_code is 200 and "true" in response.content:
+        if response.status_code == 200 and "true" in response.content:
             return (dict_from_cookiejar(response.cookies), None)
 
 
@@ -123,11 +123,11 @@ def attemptPTH(url, usr_auth):
 
     try:
         res = utility.requests_post(url, data=data)
-        if res.status_code is 200 and len(res.history) > 0:
+        if res.status_code == 200 and len(res.history) > 0:
             utility.Msg("Sucessfully passed the hash", LOG.DEBUG)
             return (dict_from_cookiejar(res.history[0].cookies), None)
         
-    except Exception, e:
+    except Exception as e:
         utility.Msg("Error authenticating: %s" % e, LOG.ERROR)
 
 
@@ -174,7 +174,7 @@ def checkAuth(ip, port, title, version):
             with open(state.bf_wordlist, 'r') as f:
                 # ensure everything is ascii or requests will explode
                 wordlist = [x.decode('ascii', 'ignore').rstrip() for x in f.readlines()]
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Failed to read wordlist (%s)" % e, LOG.ERROR)
             return
 
@@ -191,7 +191,7 @@ def checkAuth(ip, port, title, version):
 
                 cook = _auth(state.bf_user, word, url, version)
                 if cook:
-                    print '' # newline
+                    print('') # newline
 
                     if not (state.bf_user, word) in default_credentials:
                         default_credentials.insert(0, (state.bf_user, word))
@@ -200,7 +200,7 @@ def checkAuth(ip, port, title, version):
                                         (state.bf_user, word), LOG.SUCCESS)
                     return cook
 
-            print ''
+            print('')
 
         except KeyboardInterrupt:
             pass

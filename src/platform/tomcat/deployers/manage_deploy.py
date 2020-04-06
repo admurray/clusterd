@@ -2,7 +2,7 @@ from src.platform.tomcat.interfaces import TINTERFACES
 from src.platform.tomcat.authenticate import checkAuth
 from src.module.deploy_utils import parse_war_path
 from requests import exceptions
-from log import LOG
+from src.core.log import LOG
 import utility
 
 versions = ["4.0", "4.1", "5.0", "5.5", "6.0", "7.0", "8.0"]
@@ -31,7 +31,7 @@ def deploy(fingerengine, fingerprint):
 
     try:
         files = open(war_file, 'rb')
-    except Exception, e:
+    except Exception as e:
         utility.Msg(e, LOG.ERROR)
         return
 

@@ -1,7 +1,7 @@
 from src.platform.tomcat.authenticate import checkAuth
 from src.platform.tomcat.interfaces import TINTERFACES
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 import utility
 
 

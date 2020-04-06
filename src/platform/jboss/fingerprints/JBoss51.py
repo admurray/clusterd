@@ -1,7 +1,7 @@
 from src.platform.jboss.interfaces import JINTERFACES
 from cprint import FingerPrint
 from requests import exceptions
-from log import LOG
+from src.core.log import LOG
 import utility
 
 

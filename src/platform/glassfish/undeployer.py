@@ -1,7 +1,7 @@
 from src.platform.glassfish.authenticate import checkAuth
 from src.platform.glassfish.interfaces import GINTERFACES
 from src.module.deploy_utils import parse_war_path
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 
@@ -45,7 +45,7 @@ def undeploy(fingerengine, fingerprint):
         response = utility.requests_delete(base + uri, auth=cookie, 
                                          headers=headers)
 
-    if response.status_code is 200:
+    if response.status_code == 200:
         utility.Msg("'%s' undeployed successfully" % context, LOG.SUCCESS)
     else:
         utility.Msg("Failed to undeploy %s: %s" % (context, response.content),

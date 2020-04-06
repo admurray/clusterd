@@ -1,6 +1,6 @@
 from requests import exceptions
 from cprint import FingerPrint
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 

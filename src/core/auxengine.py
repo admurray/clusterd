@@ -1,6 +1,6 @@
 from os.path import abspath
 from argparse import SUPPRESS
-from log import LOG
+from src.core.log import LOG
 from re import sub
 import deployer
 import undeployer
@@ -49,7 +49,7 @@ def auxengine(fingerengine):
                      vars(fingerengine.options)[sub('-','_',mod.flag)]):
                     try:
                         mod.run(fingerengine, fingerprint)
-                    except Exception, e:
+                    except Exception as e:
                         utility.Msg("Error with module: %s" % e, LOG.ERROR)
 
                 found.append(mod.name)
@@ -80,7 +80,7 @@ def build_platform_flags(platform, egroup):
 
         try:
             mod = mod.Auxiliary()
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Auxiliary %s failed to load: %s" % (auxiliary[1], e),
                                                           LOG.DEBUG)
             continue

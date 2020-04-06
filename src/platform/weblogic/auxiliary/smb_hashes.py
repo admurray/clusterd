@@ -3,7 +3,7 @@ from src.platform.weblogic.interfaces import WINTERFACES
 from src.lib.cifstrap import Handler
 from auxiliary import Auxiliary
 from threading import Thread
-from log import LOG
+from src.core.log import LOG
 from re import findall
 from time import sleep
 import socket
@@ -121,7 +121,7 @@ class Auxiliary:
 
                 break
 
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Socket error: %s" % e, LOG.ERROR)
         finally:
             sock.close()

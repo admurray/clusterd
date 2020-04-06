@@ -5,7 +5,7 @@ from base64 import b64encode
 from os.path import abspath
 from urllib import quote_plus
 from requests import get
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 
@@ -113,7 +113,7 @@ def LinvokeLFI(base, fingerengine, fingerprint):
 
         luri = uri.format("{0}" + path)
         if checkURL(fingerengine, base + luri, 'Severity'):
-            print luri
+            print(luri)
             return True
        
 

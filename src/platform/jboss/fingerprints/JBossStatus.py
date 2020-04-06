@@ -1,7 +1,7 @@
 from src.platform.jboss.authenticate import checkAuth
 from src.platform.jboss.interfaces import JINTERFACES
 from cprint import FingerPrint
-from log import LOG
+from src.core.log import LOG
 from requests import exceptions
 import utility
 

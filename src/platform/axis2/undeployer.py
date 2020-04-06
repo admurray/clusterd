@@ -1,7 +1,7 @@
 from src.platform.axis2.interfaces import AINTERFACES
 from src.platform.axis2.authenticate import checkAuth
 from src.module.deploy_utils import parse_war_path
-from log import LOG
+from src.core.log import LOG
 import utility
 
 titles = [AINTERFACES.DSR]

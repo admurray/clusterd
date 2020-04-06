@@ -1,5 +1,5 @@
 from requests.utils import dict_from_cookiejar
-from log import LOG
+from src.core.log import LOG
 from sys import stdout
 import state
 import utility
@@ -17,7 +17,7 @@ def _auth(usr, pswd, url, version):
            }
 
     response = utility.requests_post(url, data=data)
-    if response.status_code is 200 and not "name=\"password\"" in response.content:
+    if response.status_code == 200 and not "name=\"password\"" in response.content:
         utility.Msg("Successfully authenticated with %s:%s" % (usr, pswd), LOG.DEBUG)
         return dict_from_cookiejar(response.cookies)
         
@@ -59,16 +59,15 @@ def checkAuth(ip, port, title, version):
 
                 cook = _auth(state.bf_user, word, url, version)
                 if cook:
-                    print '' # newline
+                    print('') # newline
 
                     if not (state.bf_user, word) in default_credentials:
                         default_credentials.insert(0, (state.bf_user, word))
                    
-                    utility.Msg("Successful login %s:%s"
-                                    (state.bf_user, word), LOG.SUCCESS)
+                    utility.Msg("Successful login {}:{}".format(state.bf_user, word), LOG.SUCCESS)
                     return cook
 
-            print ''
+            print('')
 
         except KeyboardInterrupt:
             pass

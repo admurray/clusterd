@@ -2,7 +2,7 @@ from src.platform.jboss.interfaces import JINTERFACES
 from cprint import FingerPrint
 from requests import exceptions
 from hashlib import md5
-from log import LOG
+from src.core.log import LOG
 import utility
 
 class FPrint(FingerPrint):

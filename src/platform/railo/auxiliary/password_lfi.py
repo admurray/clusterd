@@ -1,6 +1,6 @@
 from auxiliary import Auxiliary
 from subprocess import check_output
-from log import LOG
+from src.core.log import LOG
 import utility
 import re
 
@@ -34,7 +34,7 @@ class Auxiliary:
                                                     fingerprint.port)
         
         response = utility.requests_get(base)
-        if response.status_code is 200:
+        if response.status_code == 200:
             data = re.findall("railo-configuration p.*w*?=\"(.*?)\" ", response.content)
             if len(data) > 0:
                 
@@ -45,7 +45,7 @@ class Auxiliary:
                 else:
                     utility.Msg("Fetched password hash: %s" % data[0], LOG.SUCCESS)
 
-        elif response.status_code is 400:
+        elif response.status_code == 400:
             utility.Msg("Could not retrieve file; likely that the remote Railo instance is not express", LOG.ERROR)
         else:
             utility.Msg("Failed to retrieve file (HTTP %d)" % response.status_code, LOG.ERROR)
@@ -64,7 +64,7 @@ class Auxiliary:
         try:
             res = check_output(["./railopass.sh", password],
                                 cwd='./src/lib/railo/railopass')
-        except Exception, e:
+        except Exception as e:
             utility.Msg(e, LOG.DEBUG)
             res = e
 

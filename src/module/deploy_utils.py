@@ -6,7 +6,7 @@ from signal import SIGINT
 from os import kill, remove
 from sys import stdout
 from shutil import copy
-from log import LOG
+from src.core.log import LOG
 import importlib
 import pkgutil
 import state
@@ -38,7 +38,7 @@ def _serve(war_file = None):
         # this might be too short for huge files
         sleep(3.0)
 
-    except Exception, e:
+    except Exception as e:
         utility.Msg(e, LOG.DEBUG)
     finally:
         kill(proc.pid, SIGINT)
@@ -69,10 +69,10 @@ def waitServe(servert):
     except:
         timeout = 0
 
-    if timeout is not 10:
-        print ''
+    if timeout != 10:
+        print('')
 
-    if timeout is 0:
+    if timeout == 0:
         utility.Msg("Remote server failed to retrieve file.", LOG.ERROR)
     else:
         status = True
@@ -89,7 +89,7 @@ def wc_invoke(url, local_url, usr = None, pswd = None):
         res = check_output(["./webc_deploy.sh", url, local_url, str(usr),
                             str(pswd)],
                             cwd="./src/lib/jboss/webconsole_deploy")
-    except Exception, e:
+    except Exception as e:
         utility.Msg(e, LOG.DEBUG)
         res = e
 
@@ -113,7 +113,7 @@ def invkdeploy(version, url, local_url, random_int):
             res = check_output(["./invkdeploy.sh", version, url, 
                                 local_url, str(random_int)],
                                 cwd="./src/lib/jboss/jmxinvoke_deploy",stderr=STDOUT)
-    except Exception, e:
+    except Exception as e:
         utility.Msg(e, LOG.DEBUG)
         res = str(e)
     return res
@@ -128,7 +128,7 @@ def bsh_deploy(arch, url, version, usr = None, pswd = None):
         res = check_output(["./bshdeploy.sh", url, arch, version,
                                               str(usr), str(pswd)],
                             cwd="./src/lib/jboss/bsh_deploy")
-    except Exception, e:
+    except Exception as e:
         utility.Msg(e, LOG.DEBUG)
         res = e
 
@@ -164,7 +164,7 @@ def deploy_list(usr_platform = None):
                 utility.Msg("\t%s (%s [%s])" % (dp.title, deployer[1], 
                                                 '|'.join(dp.versions)))
 
-            except Exception, e:
+            except Exception as e:
                 utility.Msg(e, LOG.DEBUG)
                 continue
 

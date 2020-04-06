@@ -3,7 +3,7 @@ from src.platform.railo.authenticate import checkAuth
 from src.module.deploy_utils import _serve, waitServe, parse_war_path, killServe
 from collections import OrderedDict
 from os.path import abspath
-from log import LOG
+from src.core.log import LOG
 from threading import Thread
 from re import findall
 from time import sleep
@@ -71,7 +71,7 @@ def fetch_webroot(ip, fingerprint):
         url += "web.cfm"
 
     response = utility.requests_get(url, cookies=_cookie)
-    if response.status_code is 200:
+    if response.status_code == 200:
 
         if fingerprint.version in ["3.0"]:
             data = findall("path1\" value=\"(.*?)\" ", 
@@ -111,7 +111,7 @@ def create_task(ip, fingerprint, cfm_file, root):
                      ])
 
     response = utility.requests_post(base + params, data=data, cookies=cookie)
-    if not response.status_code is 200 and cfm_file not in response.content:
+    if not response.status_code == 200 and cfm_file not in response.content:
         return False
     
     # pull the CSRF for our newly minted task
@@ -144,7 +144,7 @@ def create_task(ip, fingerprint, cfm_file, root):
     data["end_year"] = ""
 
     response = utility.requests_post(base + params, data=data, cookies=cookie)
-    if response.status_code is 200 and cfm_file in response.content:
+    if response.status_code == 200 and cfm_file in response.content:
         return True
 
     return False        
@@ -192,5 +192,5 @@ def delete_task(ip, fingerprint, cfm_file):
                     ])
 
     response = utility.requests_post(base + params, data=data, cookies=cookie)
-    if response.status_code is 200:
+    if response.status_code == 200:
         return True

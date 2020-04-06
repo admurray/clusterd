@@ -1,6 +1,6 @@
 from auxiliary import Auxiliary
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 class Auxiliary:

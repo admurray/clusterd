@@ -3,7 +3,7 @@ from src.platform.jboss.interfaces import JINTERFACES
 from src.lib.cifstrap import Handler
 from collections import OrderedDict
 from threading import Thread
-from log import LOG
+from src.core.log import LOG
 from auxiliary import Auxiliary
 from time import sleep
 import socket
@@ -131,7 +131,7 @@ class Auxiliary:
 
                 break
 
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Socket error: %s" % e, LOG.ERROR)
         finally:
             sock.close()

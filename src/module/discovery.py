@@ -1,4 +1,4 @@
-from log import LOG
+from src.core.log import LOG
 from os.path import abspath
 from fingerprint import FingerEngine
 import utility

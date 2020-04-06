@@ -1,7 +1,7 @@
 from src.platform.railo.authenticate import checkAuth
 from src.platform.railo.interfaces import RINTERFACES
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 
@@ -35,7 +35,7 @@ class Auxiliary:
         url = base + uri            
 
         response = utility.requests_get(url)
-        if response.status_code is 200 and 'login' in response.content:
+        if response.status_code == 200 and 'login' in response.content:
 
             utility.Msg("Host %s:%s requires auth, checking..." %
                             (fingerengine.options.ip, fingerprint.port), LOG.DEBUG)
@@ -49,7 +49,7 @@ class Auxiliary:
                                 (fingerengine.options.ip, fingerprint.port), LOG.ERROR)
                 return
 
-        if response.status_code is 200 and 'Overview' in response.content:
+        if response.status_code == 200 and 'Overview' in response.content:
 
             (h, d) = self.fetchVersionRegex(fingerprint)
             headers = findall(h, response.content.translate(None, "\n\t\r"))

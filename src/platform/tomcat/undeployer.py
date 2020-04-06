@@ -3,7 +3,7 @@ from src.platform.tomcat.interfaces import TINTERFACES
 from src.module.deploy_utils import parse_war_path
 from requests.utils import dict_from_cookiejar
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 titles = [TINTERFACES.MAN]
@@ -74,13 +74,13 @@ def fetchCSRF(url, cookies):
         response = utility.requests_get(url + uri, cookies=cookies[0],
                                                    auth=cookies[1])
 
-        if response.status_code is 200:
+        if response.status_code == 200:
             
             data = findall("CSRF_NONCE=(.*?)\"", response.content)
             if len(data) > 0:
                 csrf = data[0]
 
-    except Exception, e:
+    except Exception as e:
         utility.Msg("Failed to fetch CSRF token (HTTP %d)" % response.status_code,
                                                              LOG.ERROR)
         csrf = None

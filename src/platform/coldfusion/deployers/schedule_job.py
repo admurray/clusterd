@@ -2,7 +2,7 @@ from src.platform.coldfusion.interfaces import CINTERFACES
 from src.platform.coldfusion.authenticate import checkAuth
 from src.module.deploy_utils import _serve, waitServe, parse_war_path,killServe
 from os.path import abspath
-from log import LOG
+from src.core.log import LOG
 from threading import Thread
 from re import findall
 from time import sleep
@@ -94,12 +94,12 @@ def create_task(ip, fingerprint, cfm_file, root):
         data['taskNameOrig'] = ""
 
     response = utility.requests_get(url, cookies=cookie)
-    if response.status_code is 200:
+    if response.status_code == 200:
 
         # create task
         response = utility.requests_post(url, data=data, cookies=cookie,
                         headers={'Content-Type':'application/x-www-form-urlencoded'})
-        if response.status_code is 200:
+        if response.status_code == 200:
             return True
         else:
             utility.Msg("Failed to deploy (HTTP %d)" % response.status_code, LOG.ERROR);
@@ -122,7 +122,7 @@ def delete_task(ip, fingerprint, cfm_file):
                                                         .format(cfm_file, csrf)
 
     response = utility.requests_get(url + uri, cookies=cookie)
-    if not response.status_code is 200:
+    if not response.status_code == 200:
         utility.Msg("Failed to remove task.  May require manual removal.", LOG.ERROR)
 
 
@@ -180,7 +180,7 @@ def fetch_csrf(ip, fingerprint, url):
         utility.Msg("Could not get auth for %s:%s" % (ip, fingerprint.port), LOG.ERROR)
         return False
 
-    if response.status_code is 200:
+    if response.status_code == 200:
 
         token = findall("name=\"csrftoken\" value=\"(.*?)\">", response.content)
         if len(token) > 0:
@@ -204,7 +204,7 @@ def fetch_webroot(ip, fingerprint):
         utility.Msg("Could not get auth for %s:%s" % (ip, fingerprint.port), LOG.ERROR)
         return False
 
-    if req.status_code is 200:
+    if req.status_code == 200:
 
         root_regex = "CFIDE &nbsp;</td><td scope=row class=\"cellRightAndBottomBlueSide\">(.*?)</td>"
         if fingerprint.version in ["7.0"]:

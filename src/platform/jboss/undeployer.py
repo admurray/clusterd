@@ -2,7 +2,7 @@ from src.platform.jboss.authenticate import checkAuth
 from src.platform.jboss.interfaces import JINTERFACES
 from src.module.deploy_utils import parse_war_path
 from collections import OrderedDict
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 

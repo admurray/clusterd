@@ -2,7 +2,7 @@ from src.platform.glassfish.authenticate import checkAuth
 from src.platform.glassfish.interfaces import GINTERFACES
 from src.module.deploy_utils import parse_war_path
 from os.path import abspath
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 import json
@@ -44,7 +44,7 @@ def deploy(fingerengine, fingerprint):
     response = utility.requests_post(base + uri, files=data,
                                     auth=cookie,
                                     headers=headers)
-    if response.status_code is 200:
+    if response.status_code == 200:
 
         if fingerprint.version in ['3.0']:
 
@@ -53,7 +53,7 @@ def deploy(fingerengine, fingerprint):
             # invoke support.  There's also no list-wars in here...
             url = base + '/management/domain/applications/application'
             response = utility.requests_get(url, auth=cookie, headers=headers)
-            if response.status_code is 200:
+            if response.status_code == 200:
 
                 data = json.loads(response.content)
                 for entry in data[u"Child Resources"]:

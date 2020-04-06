@@ -4,7 +4,7 @@ from src.module.deploy_utils import parse_war_path
 from requests.utils import dict_from_cookiejar
 from requests import exceptions
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 versions = ['4.0', '4.1', '5.0', '5.5', '6.0', '7.0', '8.0']
@@ -45,7 +45,7 @@ def deploy(fingerengine, fingerprint):
         if fingerprint.version in ['4.0', '4.1']:
             tag = 'installWar'
         files = {tag : (war_path + '.war', open(war_file, 'rb'))}
-    except Exception, e:
+    except Exception as e:
         utility.Msg(e, LOG.ERROR)
         return
 
@@ -53,7 +53,7 @@ def deploy(fingerengine, fingerprint):
     response = utility.requests_post(base + uri, files=files, cookies=cookies[0],
                                                               auth=cookies[1])
 
-    if response.status_code is 200 and "OK" in response.content:
+    if response.status_code == 200 and "OK" in response.content:
         utility.Msg("Deployed {0} to /{1}".format(war_file, war_path), LOG.SUCCESS)
     elif 'Application already exists' in response.content:
         utility.Msg("Application {0} is already deployed".format(war_file), LOG.ERROR)
@@ -76,13 +76,13 @@ def fetchCSRF(url, cookies):
         response = utility.requests_get(url + uri, cookies=cookies[0],
                                                    auth=cookies[1])
 
-        if response.status_code is 200:
+        if response.status_code == 200:
 
             data = findall('CSRF_NONCE=(.*?)\"', response.content)
             if len(data) > 0:
                 csrf = data[0]
 
-    except Exception, e:
+    except Exception as e:
         utility.Msg("Failed to fetch CSRF token (HTTP %d)" % response.status_code,
                                                              LOG.ERROR)
         csrf = None

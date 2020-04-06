@@ -1,5 +1,5 @@
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 import socket
 import utility
 
@@ -68,5 +68,5 @@ class Auxiliary:
                 else:
                     tick += 1
 
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Failed: %s" % e, LOG.ERROR)

@@ -2,7 +2,7 @@ from src.platform.tomcat.interfaces import TINTERFACES
 from requests.auth import HTTPBasicAuth
 from requests.utils import dict_from_cookiejar
 from sys import stdout
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 
@@ -17,7 +17,7 @@ def _auth(usr, pswd, url):
     """
     res = utility.requests_get(url, auth=HTTPBasicAuth(usr, pswd))
 
-    if res.status_code is 200:
+    if res.status_code == 200:
         utility.Msg("Successfully authenticated with %s:%s" % (usr, pswd), LOG.DEBUG)
         return (dict_from_cookiejar(res.cookies), HTTPBasicAuth(usr, pswd))
 
@@ -60,7 +60,7 @@ def checkAuth(ip, port, title, version):
 
                     cook = _auth(state.bf_user, word, url)
                     if cook:
-                        print ''
+                        print('')
 
                         # lets insert these credentials to the default list so we
                         # don't need to bruteforce it each time
@@ -71,7 +71,7 @@ def checkAuth(ip, port, title, version):
                                                                 LOG.SUCCESS)
                         return cook
 
-                print ''
+                print('')
 
             except KeyboardInterrupt:
                 pass

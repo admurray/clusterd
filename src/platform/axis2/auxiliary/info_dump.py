@@ -1,5 +1,5 @@
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 
@@ -25,11 +25,11 @@ class Auxiliary:
 
         try:
             response = utility.requests_get(base + uri)
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Failed to fetch info: %s" % e, LOG.ERROR)
             return
 
-        if response.status_code is 200:
+        if response.status_code == 200:
 
             data = findall("Properties</h2><pre><table(.*?)</table>", 
                                     response.content.translate(None, "\r\n\t"))

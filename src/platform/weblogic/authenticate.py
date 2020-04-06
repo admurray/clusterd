@@ -1,7 +1,7 @@
 from src.platform.weblogic.interfaces import WINTERFACES
 from requests.utils import dict_from_cookiejar
 from sys import stdout
-from log import LOG
+from src.core.log import LOG
 import utility
 import state
 
@@ -37,7 +37,7 @@ def _auth(usr, pswd, ip, fingerprint):
                                     (usr, pswd), LOG.DEBUG)
                     return (cookies, None)
 
-    except Exception, e: 
+    except Exception as e:
         utility.Msg("Failed to authenticate: %s" % e)
      
     return False 
@@ -82,7 +82,7 @@ def checkAuth(ip, fingerprint, returnCookie = False):
         try:
             with open(state.bf_wordlist, 'r') as f:
                 wordlist = [x.decode('ascii', "ignore").rstrip() for x in f.readlines()]
-        except Exception, e:
+        except Exception as e:
             utility.Msg(e, LOG.DEBUG)
             return (None, None)
 
@@ -98,7 +98,7 @@ def checkAuth(ip, fingerprint, returnCookie = False):
 
                 auth = _auth(state.bf_user, word, ip, fingerprint)
                 if auth:
-                    print ''
+                    print('')
 
                     # insert creds into default cred list
                     if not (state.bf_user, word) in default_credentials:
@@ -108,7 +108,7 @@ def checkAuth(ip, fingerprint, returnCookie = False):
                                     (state.bf_user, word), LOG.SUCCESS)
                     return auth
 
-            print ''
+            print('')
 
         except KeyboardInterrupt:
             pass

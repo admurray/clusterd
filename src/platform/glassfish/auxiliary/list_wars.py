@@ -2,7 +2,7 @@ from src.platform.glassfish.authenticate import checkAuth
 from src.platform.glassfish.interfaces import GINTERFACES
 from auxiliary import Auxiliary
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import json
 import utility
 
@@ -47,7 +47,7 @@ class Auxiliary:
 
 
         response = utility.requests_get(base+uri, auth=cookie, headers=headers)
-        if response.status_code is 200:
+        if response.status_code == 200:
 
             data = json.loads(response.content)
             if not 'properties' in data.keys():
@@ -68,7 +68,7 @@ class Auxiliary:
         }
 
         response = utility.requests_get(url, auth=cookie, headers=headers)
-        if response.status_code is 200:
+        if response.status_code == 200:
 
             data = json.loads(response.content)
             if not u"Child Resources" in data.keys():

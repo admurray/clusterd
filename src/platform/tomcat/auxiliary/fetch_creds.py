@@ -1,6 +1,6 @@
 from auxiliary import Auxiliary
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 class Auxiliary:
@@ -28,7 +28,7 @@ class Auxiliary:
         uri = '/conf/users/admin-users.xml'
 
         response = utility.requests_get(base + uri)
-        if response.status_code is 200:
+        if response.status_code == 200:
 
            un = findall("name=\"(.*?)\"", response.content)
            pw = findall("password=\"(.*?)\"", response.content)

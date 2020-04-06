@@ -1,7 +1,7 @@
 from auxengine import build_platform_flags
 from argparse import ArgumentParser
 from random import choice
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 import sys

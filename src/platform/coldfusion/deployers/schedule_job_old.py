@@ -5,7 +5,7 @@ from threading import Thread
 from os.path import abspath
 from re import findall
 from time import sleep
-from log import LOG
+from src.core.log import LOG
 import utility
 import state
 
@@ -115,7 +115,7 @@ def create_task(ip, fingerprint, cfm_file, root, cookie):
 		}
 
 	response = utility.requests_post(base+uri, data=data, cookies=cookie)
-	if response.status_code is 200:
+	if response.status_code == 200:
 
 		return True
 
@@ -166,7 +166,7 @@ def delete_task(ip, fingerprint, cfm_file, cookie):
 	}
 
 	response = utility.requests_post(base + uri, data=data, cookies=cookie)
-	if response.status_code is 200:
+	if response.status_code == 200:
 		return True
 
 
@@ -183,7 +183,7 @@ def fetch_webroot(ip, fingerprint, cookie):
 		uri = '/CFIDE/administrator/settings/mappings.cfm?mapname=/CFIDE'
 
 	response = utility.requests_get(base+uri, cookies=cookie)
-	if response.status_code is 200:
+	if response.status_code == 200:
 
 		if fingerprint.version in ['5.0']:
 			data = findall("name=\"DirectoryPath\" value=\"(.*?)\"",

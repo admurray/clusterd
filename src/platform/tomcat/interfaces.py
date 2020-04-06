@@ -1,11 +1,11 @@
 from requests import exceptions
 from cprint import FingerPrint
 from re import findall
-from log import LOG
-import authenticate
+from src.core.log import LOG
+from src.platform.tomcat import authenticate
 import random
 import string
-import utility
+from src.core import utility
 
 
 class TINTERFACES:

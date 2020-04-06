@@ -1,6 +1,6 @@
 from requests import exceptions
 from cprint import FingerPrint
-from log import LOG
+from src.core.log import LOG
 import utility
 
 class WINTERFACES:
@@ -37,7 +37,7 @@ class WLConsole(FingerPrint):
         except exceptions.Timeout:
             utility.Msg("{0} timeout to {1}:{2}".format(self.platform, ip,
                                                         rport), LOG.DEBUG)
-        except exceptions.ConnectionError, e:
+        except exceptions.ConnectionError as e:
             utility.Msg("{0} connection error to {1}:{2} ({3})".format(
                                                                 self.platform,
                                                                 ip, rport, e),

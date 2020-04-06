@@ -1,7 +1,7 @@
 from datetime import date, datetime
-from commands import getoutput
+import subprocess
 from socket import gethostbyname
-from log import LOG
+from src.core.log import LOG
 import state
 import requests
 
@@ -39,7 +39,7 @@ def Msg(string, level=LOG.INFO):
     if level is LOG.DEBUG and not state.isdebug:
         return
 
-    if output: print output
+    if output: print(output)
     log(string)
 
 
@@ -56,9 +56,9 @@ def header():
     """ Dumps the application header, printed once at startup.
     """
 
-    print '\033[32m\n\t\tclusterd/%s - clustered attack toolkit\033[0m' % version()
-    print '\t\t\t\033[33m[Supporting %d platforms]\033[0m' % (len(state.supported_platforms)) 
-    print ''
+    print('\033[32m\n\t\tclusterd/%s - clustered attack toolkit\033[0m' % version())
+    print('\t\t\t\033[33m[Supporting %d platforms]\033[0m' % (len(state.supported_platforms)))
+    print('')
 
 
 def version():

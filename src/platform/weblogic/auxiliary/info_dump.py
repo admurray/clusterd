@@ -1,7 +1,7 @@
 from src.platform.weblogic.authenticate import checkAuth
 from src.platform.weblogic.interfaces import WINTERFACES
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 
@@ -54,7 +54,7 @@ class Auxiliary:
         uri = "/console/console.portal?_nfpb=true&_pageLabel=CoreServerServerTablePage"
 
         response = utility.requests_get(base + uri, cookies=cookie)
-        if response.status_code is 200:
+        if response.status_code == 200:
 
             servers = findall("\"Select (.*?)&#40", response.content)
             if len(servers) > 0:

