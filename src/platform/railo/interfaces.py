@@ -1,6 +1,6 @@
 from cprint import FingerPrint
 from requests import exceptions
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 
@@ -32,7 +32,7 @@ class WebAdmin(FingerPrint):
             url = 'http://{0}:{1}{2}'.format(ip, rport, self.uri)
 
             response = utility.requests_get(url)
-            if response.status_code is 200:
+            if response.status_code == 200:
                 if checkError(url, self.version):
                     return True
 
@@ -67,7 +67,7 @@ class ServerAdmin(FingerPrint):
             url = 'http://{0}:{1}{2}'.format(ip, rport, self.uri)
 
             response = utility.requests_get(url)
-            if response.status_code is 200:
+            if response.status_code == 200:
                 if checkError(url, self.version):
                     return True
 
@@ -102,7 +102,7 @@ class DefaultServer(FingerPrint):
             url = 'http://{0}:{1}{2}'.format(ip, rport, self.uri)
 
             response = utility.requests_get(url)
-            if response.status_code is 200:
+            if response.status_code == 200:
                 
                 data = findall("<title>Welcome to Railo (.*?)</title>", response.content)
                 if len(data) > 0 and self.version in data[0]:

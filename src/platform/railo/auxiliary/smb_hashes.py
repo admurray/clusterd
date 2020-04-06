@@ -4,7 +4,7 @@ from src.lib.cifstrap import Handler
 from auxiliary import Auxiliary
 from threading import Thread
 from time import sleep
-from log import LOG
+from src.core.log import LOG
 import socket
 import utility
 import state
@@ -103,7 +103,7 @@ class Auxiliary:
 
                 break
 
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Socket error: %s" % e, LOG.ERROR)
         finally:
             sock.close()

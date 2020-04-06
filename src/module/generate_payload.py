@@ -1,5 +1,5 @@
-from commands import getoutput
-from log import LOG
+import subprocess
+from src.core.log import LOG
 import utility
 import os
 from zipfile import ZipFile

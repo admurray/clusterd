@@ -1,7 +1,7 @@
 from src.platform.jboss.authenticate import checkAuth
 from src.platform.jboss.interfaces import JINTERFACES
 from src.module.deploy_utils import bsh_deploy
-from log import LOG
+from src.core.log import LOG
 from base64 import b64encode
 from os import remove, path
 import utility
@@ -89,7 +89,7 @@ def rewriteBsh(war_file, arch):
                     f2.write(tmp)
 
         return True
-    except Exception, e:
+    except Exception as e:
         utility.Msg(e, LOG.ERROR)
     
     return False

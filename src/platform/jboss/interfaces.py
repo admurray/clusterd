@@ -1,10 +1,10 @@
 from cprint import FingerPrint
 from requests import exceptions
-from HTMLParser import HTMLParser
-from log import LOG
+from html.parser import HTMLParser
+from src.core.log import LOG
 from re import search
-import authenticate
-import utility
+from src.platform.jboss import authenticate
+from src.core import utility
 
 
 class JINTERFACES:

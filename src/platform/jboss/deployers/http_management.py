@@ -2,7 +2,7 @@ from src.platform.jboss.interfaces import JINTERFACES
 from src.platform.jboss.authenticate import checkAuth
 from src.module.deploy_utils import parse_war_path
 from os.path import abspath
-from log import LOG
+from src.core.log import LOG
 import utility
 
 versions = ["7.0", "7.1", '8.0', '8.1']

@@ -2,7 +2,7 @@ from src.platform.jboss.interfaces import JINTERFACES
 from src.module.deploy_utils import invkdeploy, parse_war_path
 from os.path import abspath
 from random import randint
-from log import LOG
+from src.core.log import LOG
 import utility
 
 versions = ["Any", "3.2", "4.0", "4.2", "5.0", "5.1"]

@@ -2,7 +2,7 @@ from src.platform.railo.interfaces import RINTERFACES
 from requests.utils import dict_from_cookiejar
 from collections import OrderedDict
 from sys import stdout
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 
@@ -23,7 +23,7 @@ def _auth(pswd, url, title):
         data['login_passwordserver'] = pswd
 
     response = utility.requests_post(url, data=data)
-    if response.status_code is 200 and "login.login_password" not in response.content:
+    if response.status_code == 200 and "login.login_password" not in response.content:
         utility.Msg("Successfully authenticated with '%s'" % pswd, LOG.DEBUG)
         return dict_from_cookiejar(response.cookies)
 
@@ -67,11 +67,11 @@ def checkAuth(ip, port, title):
 
                 cook = _auth(word, url, title)
                 if cook:
-                    print ''
+                    print('')
                     utility.Msg("Successful login with %s" % word, LOG.SUCCESS)
                     return cook
 
-            print ''
+            print('')
 
         except KeyboardInterrupt:
             pass

@@ -1,5 +1,5 @@
 from importlib import import_module
-from log import LOG
+from src.core.log import LOG
 import utility
 
 def run(fingerengine):

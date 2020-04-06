@@ -1,7 +1,7 @@
 from src.module.invoke_payload import invoke
 from os import path
 from random import choice
-from log import LOG
+from src.core.log import LOG
 from shutil import copyfile
 import string
 import state
@@ -81,7 +81,7 @@ def run(fingerengine):
 
                 try:
                     deployer.deploy(fingerengine, fingerprint)
-                except Exception, e:
+                except Exception as e:
                     # catch and log as debug; likely an uncaught timeout
                     utility.Msg("Deployer %s failed: %s" % (deployer.__name__, e),
                                                            LOG.DEBUG)

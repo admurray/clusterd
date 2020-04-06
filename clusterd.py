@@ -9,7 +9,7 @@ from fingerprint import FingerEngine
 from src.module import generate_payload, deploy_utils, discovery
 from auxengine import auxengine
 from parse_cmd import parse
-from log import LOG
+from src.core.log import LOG
 import platform
 import utility
 import state
@@ -91,7 +91,7 @@ def run(options):
         fingerengine.options.ip = server
 
         fingerengine.run()
-        if len(fingerengine.fingerprints) is 0:
+        if len(fingerengine.fingerprints) == 0:
             continue
 
         utility.Msg("Fingerprinting completed.", LOG.UPDATE)

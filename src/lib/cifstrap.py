@@ -182,5 +182,5 @@ class Handler(threading.Thread):
 
             self.conn.close()
 
-        except Exception, e:
+        except Exception as e:
             self.data = e

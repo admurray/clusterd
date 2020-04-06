@@ -1,9 +1,9 @@
 from os.path import abspath
 from time import sleep
-from log import LOG
+from src.core.log import LOG
 import pkgutil
-import state
-import utility
+from src.core import state
+from src.core import utility
 
 
 class FingerEngine:
@@ -34,7 +34,7 @@ class FingerEngine:
 
             if self.options.version: 
                 # we're looking for a specific version
-                if fp.version is not "Any" and self.options.version not in fp.version:
+                if fp.version != "Any" and self.options.version not in fp.version:
                     continue
 
             utility.Msg("Checking %s version %s %s..." % (fp.platform,
@@ -47,7 +47,7 @@ class FingerEngine:
                     if vars(self.options)['port']:
                         fp.port = self.options.port
                     match_fps.append(fp)
-            except Exception, e:
+            except Exception as e:
                 utility.Msg("Exception with fingerprint: %s" % e, LOG.DEBUG)
         
             if self.options.delay:

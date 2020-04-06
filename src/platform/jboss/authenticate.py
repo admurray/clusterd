@@ -3,7 +3,7 @@ from requests.auth import HTTPBasicAuth, HTTPDigestAuth
 from requests.utils import dict_from_cookiejar
 from collections import OrderedDict
 from sys import stdout
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 
@@ -27,7 +27,7 @@ def _auth(usr, pswd, url, version):
 
     res = utility.requests_get(url, auth=authobj(usr, pswd))
 
-    if res.status_code is 200:
+    if res.status_code == 200:
         utility.Msg("Successfully authenticated with %s:%s" % (usr, pswd), LOG.DEBUG)
         return (dict_from_cookiejar(res.cookies), authobj(usr, pswd))
 
@@ -97,7 +97,7 @@ def checkAuth(ip, port, title, version):
 
                     cook = _auth(state.bf_user, word, url, version)
                     if cook:
-                        print ''  # newline
+                        print('')  # newline
 
                         # lets insert these credentials to the default list so we
                         # don't need to bruteforce it each time
@@ -108,7 +108,7 @@ def checkAuth(ip, port, title, version):
                                         (state.bf_user, word), LOG.SUCCESS)
                         return cook
 
-                print ''
+                print('')
 
             except KeyboardInterrupt:
                 pass

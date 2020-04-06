@@ -5,7 +5,7 @@ from collections import OrderedDict
 from threading import Thread
 from requests import get, exceptions
 from time import sleep
-from log import LOG
+from src.core.log import LOG
 from os.path import abspath
 import state
 import utility

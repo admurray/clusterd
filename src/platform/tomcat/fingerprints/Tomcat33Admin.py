@@ -3,7 +3,7 @@ from src.platform.tomcat.interfaces import TINTERFACES
 from requests import exceptions
 from cprint import FingerPrint
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 class FPrint(FingerPrint):

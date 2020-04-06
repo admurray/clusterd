@@ -1,14 +1,14 @@
 from src.platform.railo.interfaces import RINTERFACES
 from src.module.deploy_utils import _serve, waitServe, parse_war_path, killServe
 from hashlib import md5
-from commands import getoutput
+import subprocess
 from shutil import copyfile
 from threading import Thread
 from base64 import b64encode
 from os.path import abspath
 from requests import get
 from time import sleep
-from log import LOG
+from src.core.log import LOG
 from random import randint
 import utility
 import state

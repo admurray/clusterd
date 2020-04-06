@@ -2,7 +2,7 @@ from src.platform.jboss.authenticate import checkAuth
 from src.platform.jboss.interfaces import JINTERFACES
 from auxiliary import Auxiliary
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 

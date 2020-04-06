@@ -2,7 +2,7 @@ from src.platform.railo.authenticate import checkAuth
 from src.platform.railo.interfaces import RINTERFACES
 from src.module.deploy_utils import _serve, waitServe, killServe, parse_war_path
 from re import findall
-from log import LOG
+from src.core.log import LOG
 from hashlib import md5
 from time import sleep
 from os.path import abspath
@@ -59,7 +59,7 @@ def deploy(fingerengine, fingerprint):
     uri += '&action2=addfavorite&favorite=%s' % stager
 
     response = utility.requests_get(base + uri, cookies=cookie)
-    if not response.status_code is 200:
+    if not response.status_code == 200:
         utility.Msg("Failed to deploy stager (HTTP %d)" % response.status_code,
                                                              LOG.ERROR)
         return

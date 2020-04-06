@@ -2,7 +2,7 @@ from src.platform.jboss.interfaces import JINTERFACES
 from src.platform.jboss.authenticate import checkAuth
 from src.module.deploy_utils import parse_war_path
 from os.path import abspath
-from log import LOG
+from src.core.log import LOG
 from urllib import quote_plus
 from random import choice
 from string import ascii_lowercase
@@ -42,7 +42,7 @@ def deploy(fingerengine, fingerprint):
     try:
         with open(war_file) as f:
             jsp = f.read()
-    except Exception, e:
+    except Exception as e:
         utility.Msg("Error reading payload file '%s': %s" % (war_file, e), LOG.ERROR)
         return False
 
@@ -73,7 +73,7 @@ def deploy(fingerengine, fingerprint):
             try:
                 response = utility.requests_post(url, data = uri,
                                                  cookies=cookies[0], auth=cookies[1])
-            except Exception, e:
+            except Exception as e:
                 utility.Msg("Error with authenticated request: %s" % str(e), LOG.ERROR)
                 return
         else:

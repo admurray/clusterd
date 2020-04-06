@@ -1,6 +1,6 @@
 from src.platform.jboss.interfaces import JINTERFACES
 from cprint import FingerPrint
-from log import LOG
+from src.core.log import LOG
 import state
 import utility
 import socket
@@ -28,7 +28,7 @@ class FPrint(FingerPrint):
             if res == 0:
                 return True
 
-        except Exception, e:
+        except Exception as e:
             utility.Msg(e, LOG.ERROR)
 
         return False

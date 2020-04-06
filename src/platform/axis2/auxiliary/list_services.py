@@ -1,7 +1,7 @@
 from src.platform.axis2.authenticate import checkAuth
 from src.platform.axis2.interfaces import AINTERFACES
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 
@@ -40,7 +40,7 @@ class Auxiliary:
             return
 
         response = utility.requests_get(base + uri, cookies=cookie)
-        if response.status_code is 200:
+        if response.status_code == 200:
 
            data = findall("\?wsdl\">(.*?)<", response.content)
            if len(data) > 0:

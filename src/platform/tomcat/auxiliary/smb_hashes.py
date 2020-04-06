@@ -113,7 +113,7 @@ class Auxiliary:
 
                 break
 
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Socket error: %s" % e, LOG.ERROR)
         finally:
             sock.close()

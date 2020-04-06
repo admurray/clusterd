@@ -3,7 +3,7 @@ from src.module.deploy_utils import _serve, wc_invoke, waitServe,killServe, pars
 from requests import get
 from threading import Thread
 from time import sleep
-from log import LOG
+from src.core.log import LOG
 from os.path import abspath
 import state
 import utility

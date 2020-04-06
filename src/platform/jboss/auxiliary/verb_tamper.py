@@ -1,10 +1,10 @@
 from src.platform.jboss.interfaces import JINTERFACES
 from src.module.deploy_utils import parse_war_path
-from auxiliary import Auxiliary
+from src.core.auxiliary import Auxiliary
 from os.path import abspath
-from log import LOG
-from urllib import quote_plus
-import utility
+from src.core.log import LOG
+from urllib.parse import quote_plus
+from src.core import utility
 
 
 class Auxiliary:

@@ -1,7 +1,7 @@
 from src.platform.glassfish.interfaces import GINTERFACES
 from requests import exceptions
 from cprint import FingerPrint
-from log import LOG
+from src.core.log import LOG
 import utility
 
 class FPrint(FingerPrint):
@@ -23,7 +23,7 @@ class FPrint(FingerPrint):
             url = 'http://{0}:{1}{2}'.format(ip, rport, self.uri)
 
             response = utility.requests_get(url)
-            if response.status_code is 200 and "glassfish4" in response.content:
+            if response.status_code == 200 and "glassfish4" in response.content:
                 return True
 
         except exceptions.Timeout:

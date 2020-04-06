@@ -1,6 +1,6 @@
 from hashlib import md5
 from requests import exceptions
-from log import LOG
+from src.core.log import LOG
 import utility
 
 

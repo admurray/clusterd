@@ -1,7 +1,7 @@
 from src.module.deploy_utils import parse_war_path
 from time import sleep
-from commands import getoutput
-from log import LOG
+import subprocess
+from src.core.log import LOG
 import utility
 import state
 
@@ -165,7 +165,7 @@ def _invoke(url):
             cnt += 1
             sleep(2)
 
-    except Exception, e:
+    except Exception as e:
         utility.Msg("Failed to invoke payload: %s" % e, LOG.ERROR)
         status = False
 

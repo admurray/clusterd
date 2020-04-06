@@ -4,7 +4,7 @@ from src.module.deploy_utils import parse_war_path
 from collections import OrderedDict
 from os.path import abspath
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 
@@ -105,7 +105,7 @@ def fetchCSRF(cookies, base):
     uri = '/console/console.portal?_nfpb=true&_pageLabel=AppApplicationInstallPage'
 
     response = utility.requests_get(base + uri, cookies=cookies[0])
-    if response.status_code is 200:
+    if response.status_code == 200:
 
         data = findall('AppApplicationInstallPortletfrsc" value="(.*?)">', response.content)
         if len(data) > 0:

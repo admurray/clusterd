@@ -2,7 +2,7 @@ from src.platform.glassfish.interfaces import GINTERFACES
 from requests.auth import HTTPBasicAuth
 from requests.utils import dict_from_cookiejar
 from collections import OrderedDict
-from log import LOG
+from src.core.log import LOG
 from sys import stdout
 import state
 import utility
@@ -14,7 +14,7 @@ def _auth(usr, pswd, url):
     """
 
     res = utility.requests_get(url, auth=HTTPBasicAuth(usr, pswd))
-    if res.status_code is 200:
+    if res.status_code == 200:
         utility.Msg("Successfully authenticated with %s:%s" % (usr, pswd), LOG.DEBUG)
         return HTTPBasicAuth(usr, pswd)
 
@@ -57,7 +57,7 @@ def checkAuth(ip, port, title):
 
                     cook = _auth(state.bf_user, word, url)
                     if cook:
-                        print ''
+                        print('')
 
                         if not (state.bf_user, word) in default_credentials:
                             default_credentials.insert(0, (state.bf_user, word))
@@ -66,7 +66,7 @@ def checkAuth(ip, port, title):
                                                                LOG.SUCCESS)
                         return cook
 
-                print ''
+                print('')
 
             except KeyboardInterrupt:
                 pass

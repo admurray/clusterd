@@ -1,7 +1,7 @@
 from src.platform.weblogic.authenticate import checkAuth
 from src.platform.weblogic.interfaces import WINTERFACES
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 

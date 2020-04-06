@@ -1,5 +1,5 @@
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 import utility
 import re
 

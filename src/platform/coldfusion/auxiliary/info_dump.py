@@ -1,7 +1,7 @@
 from src.platform.coldfusion.authenticate import checkAuth
 from src.platform.coldfusion.interfaces import CINTERFACES
 from auxiliary import Auxiliary
-from log import LOG
+from src.core.log import LOG
 from re import findall
 import utility
 
@@ -49,7 +49,7 @@ class Auxiliary:
 
         try:
             response = utility.requests_get(base + uri, cookies=cookies)
-        except Exception, e:
+        except Exception as e:
             utility.Msg("Failed to fetch info: %s" % e, LOG.ERROR)
             return
             

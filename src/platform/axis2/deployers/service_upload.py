@@ -3,7 +3,7 @@ from src.platform.axis2.authenticate import checkAuth
 from src.module.deploy_utils import parse_war_path
 from os.path import abspath
 from re import findall
-from log import LOG
+from src.core.log import LOG
 import utility
 
 
@@ -32,7 +32,7 @@ def deploy(fingerengine, fingerprint):
     payload = {'filename' : open(file_path, 'rb')}
 
     response = utility.requests_post(base + uri, files=payload, cookies=cookie)
-    if response.status_code is 200:
+    if response.status_code == 200:
         if 'The following error occurred' in response.content:
             error = findall("occurred <br/> (.*?)</font>", response.content)
             utility.Msg("Failed to deploy {0}.  Reason: {1}".format(file_name,

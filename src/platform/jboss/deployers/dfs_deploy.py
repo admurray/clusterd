@@ -3,7 +3,7 @@ from src.platform.jboss.authenticate import checkAuth
 from src.module.deploy_utils import parse_war_path
 from collections import OrderedDict
 from os.path import abspath
-from log import LOG
+from src.core.log import LOG
 import utility
 
 title = JINTERFACES.JMX
