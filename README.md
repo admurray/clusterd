@@ -5,10 +5,13 @@ clusterd is an open source application server attack toolkit.  Born out of frust
 current fingerprinting and exploitation methods, clusterd automates the fingerprinting,
 reconnaissance, and exploitation phases of an application server attack.  See the wiki for more information. 
 
+##### NOTE: This port is still work in progress - Also looking into adding and updating sigs 
+
 Requirements
 ----
-* Python >= 2.7.x
-* Requests >= 2.2.x
+* Python >= 3.8.x
+* Requests >= 2.23.x
+* urllib3 >= 1.25.8
 
 Installation
 ----
